@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-const Container = styled.div`
+const AppContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
@@ -9,4 +9,4 @@ const Container = styled.div`
 	padding: 0;
 `;
 
-export { Container };
+export { AppContainer };
