@@ -91,4 +91,18 @@ const Button = styled.button`
 	}
 `;
 
-export { Main, Container, Tabs, Tab, Form, Button, Input };
+const Image = styled.img`
+	width: 100%;
+	height: auto;
+	@media (min-width: 600px) {
+		max-width: 30%;
+	}
+	@media (min-width: 900px) {
+		max-width: 40%;
+	}
+	@media (min-width: 1200px) {
+		max-width: 32%;
+	}
+`;
+
+export { Main, Container, Tabs, Tab, Form, Button, Input, Image };

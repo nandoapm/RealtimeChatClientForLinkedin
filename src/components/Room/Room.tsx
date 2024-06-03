@@ -1,6 +1,6 @@
-import { ChangeEvent, useState } from "react";
-import { Container, Main } from "./RoomStyles";
-import { Button } from "@mui/material";
+import { ChangeEvent, KeyboardEvent, useState } from "react";
+import { Container, Main, Message, Messages } from "./RoomStyles";
+import { FormControl, IconButton, Input, InputAdornment } from "@mui/material";
 import TelegramIcon from "@mui/icons-material/Telegram";
 
 const Room = () => {
@@ -12,22 +12,46 @@ const Room = () => {
 	};
 
 	const submitMessage = () => {
+		if (!message) {
+			throw new Error("Please enter a message");
+		}
+
 		setMessages([...messages, message]);
+
+		setMessage("");
+	};
+
+	const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === "Enter") {
+			event.preventDefault();
+			submitMessage();
+		}
 	};
 
 	return (
 		<Container>
 			<Main>
-				<ul>
+				<Messages>
 					{messages.map((message, index) => (
-						<li key={index}>{message}</li>
+						<Message key={index}>{message}</Message>
 					))}
-				</ul>
+				</Messages>
 			</Main>
-			<input onChange={handleChange} />
-			<Button onClick={submitMessage}>
-				<TelegramIcon style={{ marginRight: "8px" }} />
-			</Button>
+			<FormControl fullWidth variant="standard">
+				<Input
+					type="text"
+					onChange={handleChange}
+					onKeyDown={handleKeyDown}
+					value={message}
+					endAdornment={
+						<InputAdornment position="end">
+							<IconButton aria-label="toggle send message" onClick={submitMessage}>
+								<TelegramIcon />
+							</IconButton>
+						</InputAdornment>
+					}
+				/>
+			</FormControl>
 		</Container>
 	);
 };
